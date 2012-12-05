@@ -8,11 +8,11 @@ Function.prototype.method = function (name, func) {
 
 //specifies the prototype of a new object
 if (typeof Object.beget !== 'function') {
-	 Object.beget = function (o) {
-		 var F = function () {};
-		 F.prototype = o;
-		 return new F();
-	 };
+    Object.beget = function (o) {
+		var F = function () {};
+		F.prototype = o;
+		return new F();
+	};
 }
 
 /* NEW METHODS */
@@ -20,8 +20,15 @@ Number.method('integer', function (  ) {
 	return Math[this < 0 ? 'ceiling' : 'floor'](this);
 });
 
+Number.prototype.toOrdinal = function() {
+    var n = this % 100,
+        suffix = ['th', 'st', 'nd', 'rd', 'th'],
+        ord = n < 21 ? (n < 4 ? suffix[n] : suffix[0]) : (n % 10 > 4 ? suffix[0] : suffix[n % 10]);
+    return this + ord;
+};
+
 String.method('trim', function (  ) {
-	return this.replace(/^\s+|\s+$/g, '');
+    return this.replace(/^\s+|\s+$/g, '');
 });
 
 String.method('deentityify', (function () {
